@@ -4,6 +4,7 @@ import { z } from "zod";
 import { hafezProvider } from "@/server/providers/hafez.provider";
 import { falRepository } from "@/server/repositories/fal.repository";
 import { ApiError } from "@/lib/api/errors";
+import type { FalResult } from "@/types/fal";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,17 +61,15 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const fortune = await hafezProvider.getRandomFortune();
+        const fortune = hafezProvider.getRandomFortune();
 
-        const result = {
+        const result: FalResult = {
             id: randomUUID(),
-            ghazal: {
+            fortune: {
                 id: fortune.id,
                 title: fortune.title,
-                poet: "حافظ",
-                verses: [],
+                interpreter: fortune.interpreter,
             },
-            interpretation: fortune.interpreter,
             createdAt: new Date().toISOString(),
         };
 
@@ -87,9 +86,9 @@ export async function POST(request: NextRequest) {
             },
         );
     } catch (error) {
-        const status = error instanceof ApiError ? error.status : 502;
+        const status = error instanceof ApiError ? error.status : 500;
         const code =
-            error instanceof ApiError ? error.code : "UPSTREAM_ERROR";
+            error instanceof ApiError ? error.code : "INTERNAL_ERROR";
         const message =
             error instanceof ApiError && status < 500
                 ? error.message

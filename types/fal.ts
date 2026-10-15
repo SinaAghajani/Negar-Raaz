@@ -1,12 +1,15 @@
-import type { Ghazal } from "@/types/ghazal";
-
 export type FalStatus = "idle" | "loading" | "success" | "error";
+
+export interface HafezFortune {
+    id: string;
+    title: string;
+    interpreter: string;
+}
 
 export interface FalResult {
     id: string;
-    ghazal: Ghazal;
+    fortune: HafezFortune;
     createdAt: string;
-    interpretation?: string;
 }
 
 export interface CreateFalInput {

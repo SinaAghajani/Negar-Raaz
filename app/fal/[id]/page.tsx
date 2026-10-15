@@ -4,50 +4,52 @@ import { falRepository } from "@/server/repositories/fal.repository";
 import FalResultView from "@/components/fal/FalResult";
 
 interface FalDetailPageProps {
-  params: Promise<{ id: string }>;
+    params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({
-  params,
+    params,
 }: FalDetailPageProps): Promise<Metadata> {
-  const { id } = await params;
-  const result = await falRepository.getById(id);
+    const { id } = await params;
+    const result = await falRepository.getById(id);
 
-  if (!result) {
+    if (!result) {
+        return {
+            title: "فال پیدا نشد",
+            robots: {
+                index: false,
+                follow: false,
+            },
+        };
+    }
+
     return {
-      title: "فال پیدا نشد",
-      robots: {
-        index: false,
-        follow: false,
-      },
+        title: `فال حافظ | ${result.fortune.title}`,
+        description: result.fortune.interpreter,
+        alternates: {
+            canonical: `/fal/${encodeURIComponent(id)}`,
+        },
+        openGraph: {
+            title: `فال حافظ | ${result.fortune.title}`,
+            description: result.fortune.interpreter,
+            type: "article",
+        },
     };
-  }
-
-  return {
-    title: `فال حافظ ${result.ghazal.title ? `| ${result.ghazal.title}` : ""}`,
-    description: "مشاهده‌ی غزل و نتیجه‌ی فال حافظ در نگار راز.",
-    alternates: {
-      canonical: `/fal/${encodeURIComponent(id)}`,
-    },
-    openGraph: {
-      title: "فال حافظ | نگار راز",
-      description: "غزلی از حافظ، برای لحظه‌ای تأمل و آرامش.",
-      type: "article",
-    },
-  };
 }
 
-export default async function FalDetailPage({ params }: FalDetailPageProps) {
-  const { id } = await params;
-  const result = await falRepository.getById(id);
+export default async function FalDetailPage({
+    params,
+}: FalDetailPageProps) {
+    const { id } = await params;
+    const result = await falRepository.getById(id);
 
-  if (!result) {
-    notFound();
-  }
+    if (!result) {
+        notFound();
+    }
 
-  return (
-    <main className="page-shell">
-      <FalResultView result={result} onRetry={undefined} />
-    </main>
-  );
+    return (
+        <main className="page-shell">
+            <FalResultView result={result} onRetry={undefined} />
+        </main>
+    );
 }

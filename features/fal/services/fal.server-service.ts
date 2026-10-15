@@ -13,11 +13,11 @@ export async function createFal(
         throw new Error("متن نیت نمی‌تواند بیشتر از ۵۰۰ نویسه باشد.");
     }
 
-    const ghazal = await hafezProvider.getRandom();
+    const fortune = hafezProvider.getRandomFortune();
 
     return {
         id: createId(),
-        ghazal,
+        fortune,
         createdAt: new Date().toISOString(),
     };
 }

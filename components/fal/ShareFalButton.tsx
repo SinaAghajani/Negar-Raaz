@@ -2,19 +2,19 @@
 
 import { useState } from "react";
 import { Check, Copy, Share2 } from "lucide-react";
-import type { Ghazal } from "@/types/ghazal";
+import type { HafezFortune } from "@/types/fal";
 
 interface ShareFalButtonProps {
-  ghazal: Ghazal;
+  fortune: HafezFortune;
 }
 
-export default function ShareFalButton({ ghazal }: ShareFalButtonProps) {
+export default function ShareFalButton({ fortune }: ShareFalButtonProps) {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const text = [
-    ghazal.title || `غزل شماره ${ghazal.id}`,
-    ...ghazal.verses.map((verse) => `${verse.first}\n${verse.second}`),
+    `فال حافظ: ${fortune.title}`,
+    fortune.interpreter,
     "از نگار راز",
   ].join("\n\n");
 
@@ -24,7 +24,7 @@ export default function ShareFalButton({ ghazal }: ShareFalButtonProps) {
     try {
       if (navigator.share) {
         await navigator.share({
-          title: ghazal.title || "فال حافظ | نگار راز",
+          title: `فال حافظ | ${fortune.title}`,
           text,
           url: window.location.href,
         });
@@ -36,7 +36,9 @@ export default function ShareFalButton({ ghazal }: ShareFalButtonProps) {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch (cause) {
-      if (cause instanceof Error && cause.name === "AbortError") return;
+      if (cause instanceof Error && cause.name === "AbortError") {
+        return;
+      }
 
       setError("اشتراک‌گذاری انجام نشد. دوباره تلاش کن.");
     }
@@ -71,7 +73,7 @@ export default function ShareFalButton({ ghazal }: ShareFalButtonProps) {
         className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 text-sm text-gold transition hover:bg-surface-light"
       >
         {copied ? <Check size={17} /> : <Copy size={17} />}
-        {copied ? "کپی شد" : "کپی غزل"}
+        {copied ? "کپی شد" : "کپی فال"}
       </button>
 
       {error && (

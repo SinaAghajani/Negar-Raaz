@@ -1,7 +1,6 @@
 "use client";
 
 import type { Ghazal } from "@/types/ghazal";
-import GhazalList from "@/components/ghazals/GhazalList";
 import { Heart } from "lucide-react";
 
 interface FavoritesListProps {
@@ -29,6 +28,4 @@ export default function FavoritesList({
       </div>
     );
   }
-
-  return <GhazalList ghazals={ghazals} onSelect={onSelect} />;
 }

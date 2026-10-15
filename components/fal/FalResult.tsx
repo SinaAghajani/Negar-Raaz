@@ -1,45 +1,46 @@
 import type { FalResult as FalResultData } from "@/types/fal";
-import GhazalVerses from "./GhazalVerses";
 import Interpretation from "./Interpretation";
 import ShareFalButton from "./ShareFalButton";
 
 interface FalResultProps {
-  result: FalResultData;
-  onRetry?: () => void;
+    result: FalResultData;
+    onRetry?: () => void;
 }
 
 export default function FalResult({ result, onRetry }: FalResultProps) {
-  return (
-    <section className="mx-auto w-full max-w-4xl space-y-6">
-      <div className="text-center">
-        <p className="text-sm text-gold">فال تو آماده است</p>
+    const { fortune } = result;
 
-        <h2 className="mt-3 text-3xl font-bold text-gold-light">غزل حافظ</h2>
+    return (
+        <section className="mx-auto w-full max-w-4xl space-y-6">
+            <div className="text-center">
+                <p className="text-sm text-gold">فال تو آماده است</p>
 
-        <p className="mt-3 text-sm text-muted">
-          {new Intl.DateTimeFormat("fa-IR", {
-            dateStyle: "long",
-          }).format(new Date(result.createdAt))}
-        </p>
-      </div>
+                <h2 className="mt-3 text-3xl font-bold text-gold-light">
+                    {fortune.title}
+                </h2>
 
-      <GhazalVerses ghazal={result.ghazal} />
+                <p className="mt-3 text-sm text-muted">
+                    {new Intl.DateTimeFormat("fa-IR", {
+                        dateStyle: "long",
+                    }).format(new Date(result.createdAt))}
+                </p>
+            </div>
 
-      <Interpretation text={result.interpretation} />
+            <Interpretation text={fortune.interpreter} />
 
-      <ShareFalButton ghazal={result.ghazal} />
+            <ShareFalButton fortune={fortune} />
 
-      {onRetry && (
-        <div className="text-center">
-          <button
-            type="button"
-            onClick={onRetry}
-            className="rounded-xl border border-border px-5 py-3 text-sm text-foreground transition hover:bg-surface"
-          >
-            گرفتن فال دوباره
-          </button>
-        </div>
-      )}
-    </section>
-  );
+            {onRetry && (
+                <div className="text-center">
+                    <button
+                        type="button"
+                        onClick={onRetry}
+                        className="rounded-xl border border-border px-5 py-3 text-sm text-foreground transition hover:bg-surface"
+                    >
+                        گرفتن فال دوباره
+                    </button>
+                </div>
+            )}
+        </section>
+    );
 }
