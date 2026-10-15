@@ -1,36 +1,182 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ نگار راز | Negar Raz
 
-## Getting Started
+<p align="center">
+  تجربه‌ای شاعرانه از فال حافظ، در فضایی آرام، رازآلود و الهام‌گرفته از فرهنگ ایرانی.
+</p>
 
-First, run the development server:
+<p align="center">
+  <strong>روایتی نو از پیوند شعر، اندیشه و رازهای زندگی</strong>
+</p>
+
+---
+
+## 📖 درباره پروژه
+
+**نگار راز** یک وب‌سایت فارسی برای تجربه فال حافظ است که با الهام از ادبیات کلاسیک ایران و با بهره‌گیری از فناوری‌های مدرن وب توسعه داده می‌شود.
+
+هدف پروژه، ارائه تجربه‌ای ساده، دلنشین و چشم‌نواز برای انتخاب فال حافظ و مطالعه تعبیر آن، در محیطی کاملاً فارسی و راست‌چین است.
+
+## ✨ ویژگی‌ها
+
+- 🎴 انتخاب تصادفی فال حافظ از داده‌های محلی
+- 📜 نمایش عنوان و تعبیر هر فال
+- 🌙 رابط کاربری با تم تیره و الهام‌گرفته از زیبایی‌شناسی ایرانی
+- 🟡 پالت رنگی زمردی و طلایی
+- 📱 طراحی واکنش‌گرا برای موبایل، تبلت و دسکتاپ
+- 🎨 انیمیشن‌های نرم و هدفمند
+- 🧩 معماری ماژولار و توسعه‌پذیر
+- 🛡️ اعتبارسنجی داده‌ها و مدیریت خطاها
+- 🇮🇷 پشتیبانی از زبان فارسی و چیدمان راست‌چین
+
+## 🛠️ فناوری‌های استفاده‌شده
+
+| فناوری          | کاربرد                        |
+| --------------- | ----------------------------- |
+| Next.js         | چارچوب اصلی و مسیریابی        |
+| React           | ساخت رابط کاربری              |
+| TypeScript      | توسعه نوع‌محور                |
+| Tailwind CSS v4 | استایل‌دهی                    |
+| Motion          | انیمیشن‌های رابط کاربری       |
+| Lucide React    | آیکون‌ها                      |
+| Zod             | اعتبارسنجی داده‌ها            |
+| Three.js        | جلوه‌های سه‌بعدی در صورت نیاز |
+
+## 📁 ساختار پروژه
+
+```text
+negar-raz/
+├── app/
+│   ├── api/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   └── layout/
+├── config/
+├── data/
+│   └── hafez-fortunes.json
+├── features/
+│   ├── fal/
+│   └── ghazal/
+├── lib/
+│   └── api/
+├── server/
+│   ├── providers/
+│   └── repositories/
+├── types/
+├── public/
+├── package.json
+└── README.md
+```
+
+> ساختار بالا نمای کلی پیشنهادی پروژه است و ممکن است با ساختار واقعی مخزن تفاوت داشته باشد.
+
+## 🚀 راه‌اندازی پروژه
+
+### پیش‌نیازها
+
+- Node.js سازگار با نسخه Next.js پروژه
+- npm یا یکی از مدیرهای بسته سازگار
+- Git، در صورت دریافت پروژه از مخزن
+
+### نصب وابستگی‌ها
+
+```bash
+npm install
+```
+
+### اجرای محیط توسعه
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+سپس آدرس زیر را در مرورگر باز کن:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### بررسی و ساخت نسخه Production
 
-## Learn More
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+دستورات بالا به وجود اسکریپت‌های متناظر در `package.json` وابسته‌اند.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🗂️ ساختار داده‌های فال
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+اطلاعات فال‌ها در فایل زیر نگهداری می‌شود:
 
-## Deploy on Vercel
+`data/hafez-fortunes.json`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+نمونه ساختار هر رکورد:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "id": 200,
+  "title": "منظر نظر",
+  "interpreter": "متن تعبیر فال حافظ"
+}
+```
+
+هر رکورد شامل شناسه، عنوان و تعبیر فال است. انتخاب فال از داده‌های محلی انجام می‌شود تا عملکرد این قابلیت به دسترس‌پذیری یک API خارجی وابسته نباشد.
+
+## 🎨 هویت بصری
+
+هویت بصری نگار راز بر پایه ترکیب رنگ‌های زمردی، سبز تیره و طلایی شکل گرفته است.
+
+| متغیر         | رنگ       |
+| ------------- | --------- |
+| Background    | `#071D1B` |
+| Surface       | `#0C2925` |
+| Surface Light | `#123831` |
+| Foreground    | `#F5ECD9` |
+| Muted         | `#B8B7A7` |
+| Gold          | `#D9B36C` |
+| Gold Light    | `#F1D89F` |
+| Teal          | `#367A70` |
+
+رابط کاربری با تمرکز بر خوانایی، سادگی، فضای خالی مناسب و تایپوگرافی فارسی طراحی می‌شود.
+
+## 🧱 اصول توسعه
+
+- رعایت معماری ماژولار و جداسازی مسئولیت‌ها
+- استفاده از TypeScript در سراسر پروژه
+- اعتبارسنجی ورودی‌ها و داده‌های دریافتی
+- مدیریت یکپارچه خطاها
+- رعایت اصول دسترس‌پذیری
+- بهینه‌سازی عملکرد و تجربه موبایل
+- حفظ سازگاری میان API، سرویس‌ها، Providerها و Repositoryها
+
+## 🗺️ نقشه راه
+
+- [x] تعریف هویت بصری اولیه
+- [x] تعیین ساختار داده‌های محلی فال
+- [ ] تکمیل فرایند دریافت و نمایش فال
+- [ ] تکمیل تجربه کاربری موبایل
+- [ ] بهبود انیمیشن‌ها و جزئیات بصری
+- [ ] تکمیل سئو و Metadata
+- [ ] بررسی دسترس‌پذیری
+- [ ] تست نهایی و آماده‌سازی انتشار
+
+## 🤝 مشارکت
+
+برای پیشنهاد قابلیت جدید، گزارش مشکل یا مشارکت در توسعه پروژه، می‌توان از بخش Issues و Pull Requests مخزن استفاده کرد.
+
+## 📄 مجوز
+
+مجوز استفاده و بازتوزیع پروژه باید مطابق مجوزی باشد که برای مخزن انتخاب شده است. تا زمان تعیین مجوز، حقوق استفاده و بازتوزیع را مفروض نگیرید.
+
+---
+
+<p align="center">
+  ساخته‌شده با عشق به شعر فارسی و میراث ادبی ایران 💚
+</p>
+
+<p align="center">
+  <strong>نگار راز — جایی برای مکث، تأمل و هم‌نشینی با شعر حافظ</strong>
+</p>
